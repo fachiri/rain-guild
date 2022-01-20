@@ -1,0 +1,23 @@
+RewriteEngine On
+RewriteBase /rain_guild/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^home$ index.php?page=home
+RewriteRule ^announcement$ index.php?page=announ
+RewriteRule ^list_member$ index.php?page=list_member
+RewriteRule ^tournament$ index.php?page=tournament
+RewriteRule ^guide$ index.php?page=guide
+RewriteRule ^gallery$ index.php?page=gallery
+RewriteRule ^login$ form.php?page=login
+RewriteRule ^registration$ form.php?page=regis
+
+RewriteRule ^homepage$ member.php?page=home
+RewriteRule ^announcement_page$ member.php?page=announ
+RewriteRule ^list_member_page$ member.php?page=list_member
+RewriteRule ^tournament_page$ member.php?page=tournament
+RewriteRule ^guide_page$ member.php?page=guide
+RewriteRule ^gallery_page$ member.php?page=gallery_member
+RewriteRule ^profile$ member.php?page=profile
+RewriteRule ^post$ form.php?page=post
