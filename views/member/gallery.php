@@ -1,12 +1,8 @@
 <?php 
 	// Retrieve posts from the database
-	$posts = mysqli_query($conn, "SELECT * FROM posts");
+	$posts = mysqli_query($conn, "SELECT * FROM posts ORDER BY id_post DESC");
 	$id_user = $_SESSION['id_user'];
 	$id_member = $_SESSION['id_member'];
-
-	
-
-
 ?>
 
 
@@ -44,7 +40,9 @@
 				</td>
 			</tr>
 			<tr>
-				<!-- <td colspan="4" class="post-img"><img src="public/uploads/ss/imgnotfound.jpg" style="border-top: 1px solid #000; border-bottom: 1px solid #000;"></td>	 -->
+				<?php if($row['img'] !== ''): ?>
+					<td colspan="4" class="post-img"><img src="public/uploads/post/<?php echo $row['img'] ?>"></td>	
+				<?php endif; ?>
 			</tr>
 			<tr>
 				<td colspan="2" class="p-10">

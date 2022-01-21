@@ -131,6 +131,10 @@ function upload($arr, $img){
 		case 'char':
 			move_uploaded_file($tmpName, '../../public/uploads/ss/' . $namaFileBaru);
 			break;
+		
+		case 'post':
+			move_uploaded_file($tmpName, 'public/uploads/post/' . $namaFileBaru);
+			break;
 	}
 
 	return $namaFileBaru;
@@ -299,18 +303,36 @@ function post($data, $id_user) {
 		} else {
 			$i = -1;
 		}
-	} $hashtag = implode(",", $tags);
+	} $hashtag = implode(",", $tags);6
 
-	mysqli_query($conn, "INSERT INTO posts (id_user, caption, hashtag, datetime, img) VALUES ('$id_user', '$caption', '$hashtag', '$date', '')");
+	if( $_FILES['imgPost']['error'] === 0 ) {
+		$imgPost = upload($_FILES['imgPost'], 'post');
+	} else {
+		$imgPost = '';
+	}
 
+	mysqli_query($conn, "INSERT INTO posts (id_user, caption, hashtag, datetime, img) VALUES ('$id_user', '$caption', '$hashtag', '$date', '$imgPost')");
+	// var_dump($conn->error); die;
 	return (mysqli_affected_rows($conn));
 }
 
 function deletePost($id) {
 	global $conn;
-	mysqli_query($conn, "DELETE FROM posts WHERE id_post = $id");
+
+	$namaFile = mysqli_query($conn, "SELECT img FROM posts WHERE id_post = '$id' ");
+	$row = mysqli_fetch_assoc($namaFile);
+
 	mysqli_query($conn, "DELETE FROM likes WHERE id_post = $id");
+	mysqli_query($conn, "DELETE FROM posts WHERE id_post = $id");
+
+	if ($row["img"] == !null && mysqli_affected_rows($conn) > 0) {
+		$file = $row["img"];
+		unlink('../public/uploads/post/' . $file);
+	}
+
 	return mysqli_affected_rows($conn);
+
+
 }
 
 

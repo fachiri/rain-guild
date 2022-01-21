@@ -20,15 +20,19 @@ if (isset($_POST["post"])) {
 	<p>Post</p>
 </div>
 <br>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
 	<div class="formPost">
 		<label class="label">Caption</label>
-		<textarea class="inputStyle" name="caption" id="" cols="30" rows="10" placeholder="Type your caption"></textarea>
+		<textarea class="inputStyle" name="caption" id="" cols="30" rows="10" placeholder="Type your caption" required></textarea>
 	</div>
 	<div class="formPost">
 		<label class="label">Hashtag</label>
 		<input type="text" class="inputStyle" id="hashtags" autocomplete="off" placeholder="Type your hashtag & click enter.">
 		<div class="tag-container"></div>
+	</div>
+	<div class="formPost">
+		<label class="label">Image</label>
+		<input type="file" name="imgPost" class="inputStyle">
 	</div>
 	<div class="allButton">	
 		<div class="submit">
@@ -39,6 +43,26 @@ if (isset($_POST["post"])) {
 		</div>			
 	</div>
 </form>
+
+<script type="text/javascript">
+		function PreviewImage() {
+		var oFReader = new FileReader();
+		oFReader.readAsDataURL(document.getElementById("img").files[0]);
+		oFReader.onload = function (oFREvent)
+		 {
+		    document.getElementById("uploadPreview").src = oFREvent.target.result;
+		};
+		};
+
+		function PreviewImage2() {
+		var oFReader = new FileReader();
+		oFReader.readAsDataURL(document.getElementById("img2").files[0]);
+		oFReader.onload = function (oFREvent)
+		 {
+		    document.getElementById("uploadPreview2").src = oFREvent.target.result;
+		};
+		};
+	</script>
 
 <script>
 
