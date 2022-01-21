@@ -303,7 +303,7 @@ function post($data, $id_user) {
 		} else {
 			$i = -1;
 		}
-	} $hashtag = implode(",", $tags);6
+	} $hashtag = implode(",", $tags);
 
 	if( $_FILES['imgPost']['error'] === 0 ) {
 		$imgPost = upload($_FILES['imgPost'], 'post');
